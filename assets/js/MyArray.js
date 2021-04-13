@@ -1,3 +1,16 @@
+class MyArrayIterator {
+  constructor(array){
+    this.array = array;
+    this.currentIndex = 0;
+  }
+  next(){
+    return {
+      done: this.currentIndex >= this.array.length,
+      value: this.array[this.currentIndex++],
+    }
+  }
+}
+
 class MyArray {
   constructor() {
     this.length = 0;
@@ -132,6 +145,10 @@ class MyArray {
     });
 
     return result;
+  }
+
+  [Symbol.iterator]() {
+    return new MyArrayIterator(this);
   }
 
   static isMyArray(arr) {
